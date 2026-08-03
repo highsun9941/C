@@ -1,39 +1,58 @@
-# Prime S⁵ PCA control study
+# Prime Gap S⁵ Geometry Experiment
 
-This repository contains a reproducible Python analysis for:
+This repository contains a reproducible exploratory pipeline that shifts the
+focus from primes themselves to **prime gaps**.
 
-1. generating the first 100,000 primes,
-2. mapping scalar prime-derived datasets to coordinates on `S⁵`,
-3. projecting those coordinates to 3D with PCA,
-4. checking KMeans clustering structure for `k=2..10`,
-5. correlating the prime PCA trajectory with initial Riemann zeta zero ordinates, and
-6. comparing prime metrics with a random-integer Monte Carlo null distribution.
+Hypothesis under test:
 
-Run:
+> Prime gaps embedded on S⁵ generate a non-random geometric structure whose
+> graph spectrum may contain information related to the distribution of primes
+> and possibly the Riemann zeta function.
+
+The code reports measurable statistics only and does not claim evidence for the
+Riemann hypothesis.
+
+## Run
 
 ```bash
 python3 -m pip install -r requirements.txt
 python3 prime_s5_pca_analysis.py
 ```
 
-The default output is `prime_s5_pca_results.json`.
+By default the script generates the first 200,000 primes, builds the first
+199,999 prime gaps, embeds them on S⁵ for frequency pairs `(3,5)`, `(5,7)`,
+`(7,11)`, and `(11,13)`, then writes deliverables under `outputs/`.
 
-## Control datasets
+For a fast smoke test:
 
-The script runs the identical `S⁵` embedding, PCA, KMeans, and silhouette pipeline for:
+```bash
+python3 prime_s5_pca_analysis.py --prime-count 2000 --sample-size 500 \
+  --spectral-sample-size 400 --eigen-count 50 --zero-count 50 \
+  --monte-carlo-trials 5
+```
 
-- the prime sequence itself,
-- uniformly random integers over the same range,
-- shuffled `log(prime)` values,
-- composite numbers only,
-- prime gaps, and
-- alternative prime-derived embeddings: `sqrt(p)`, `p^(1/3)`, `π(p)`, `Li(p)`, and von Mangoldt `Λ(p)`.
+## Deliverables
 
-## Monte Carlo null study
+The pipeline writes:
 
-By default, the script runs `1000` random-integer Monte Carlo trials. Each trial uses a
-configurable random sample size (`--monte-carlo-sample-count`, default `300`) so the
-null experiment remains practical while preserving the same embedding and clustering
-pipeline. Dataset-level silhouette scores are computed on a configurable sample (`--cluster-sample`, default `5000`) to keep pairwise distance calculations tractable. The report saves null means, standard deviations, quantiles, z-scores, and
-empirical two-sided p-values for the prime dataset's 3D PCA explained variance total
-and best silhouette score.
+- `outputs/prime_gap_dataset.csv` with `index, prime, next_prime, gap, log_prime, log_gap`.
+- `outputs/embedding_<dataset>_<alpha>_<beta>.csv` for every dataset/frequency pair.
+- `outputs/eigenvalues_<dataset>_<alpha>_<beta>.csv` containing computed Laplacian eigenvalues.
+- `outputs/riemann_zeros.csv` containing zeta-zero ordinates computed with `mpmath`.
+- `outputs/results.json` with geometry, graph, spectral, zeta-comparison, wave-analysis, and Monte Carlo summaries.
+- `outputs/REPORT.md` summarizing observations, controls, limitations, and speculation.
+- `outputs/plots/` with eigenvalue histograms and cumulative spectral plots.
+
+## Controls
+
+The identical pipeline is applied to:
+
+1. prime gaps,
+2. shuffled prime gaps,
+3. random integers,
+4. Poisson-distributed gaps,
+5. Cramér-model gap surrogates, and
+6. primes themselves.
+
+The default Monte Carlo study uses 1000 trials of shuffled-gap nulls for sampled
+spectral and nearest-neighbor proxies.
