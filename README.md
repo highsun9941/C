@@ -40,7 +40,6 @@ The pipeline writes:
 - `outputs/eigenvalues_<dataset>_<alpha>_<beta>.csv` containing computed Laplacian eigenvalues.
 - `outputs/riemann_zeros.csv` containing zeta-zero ordinates computed with `mpmath`.
 - `outputs/results.json` with geometry, graph, spectral, zeta-comparison, wave-analysis, and Monte Carlo summaries.
-- `prime_s5_pca_results.json`, a compatibility copy of the JSON summary at the repository root.
 - `outputs/REPORT.md` summarizing observations, controls, limitations, and speculation.
 - `outputs/plots/` with eigenvalue histograms and cumulative spectral plots.
 
@@ -56,6 +55,4 @@ The identical pipeline is applied to:
 6. primes themselves.
 
 The default Monte Carlo study uses 1000 trials of shuffled-gap nulls for sampled
-spectral and nearest-neighbor proxies. Generated output directories are ignored by
-Git, but the root `prime_s5_pca_results.json` compatibility result is tracked so
-reviewers can immediately inspect the latest JSON summary.
+spectral and nearest-neighbor proxies.

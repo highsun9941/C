@@ -304,7 +304,6 @@ def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--prime-count", type=int, default=200_000)
     ap.add_argument("--output-dir", type=Path, default=Path("outputs"))
-    ap.add_argument("--summary-json", type=Path, default=Path("prime_s5_pca_results.json"), help="Compatibility JSON result path written in addition to output-dir/results.json")
     ap.add_argument("--sample-size", type=int, default=5000)
     ap.add_argument("--spectral-sample-size", type=int, default=3000)
     ap.add_argument("--eigen-count", type=int, default=500)
@@ -331,9 +330,7 @@ def main() -> None:
         results["datasets"][ds.name] = dres
     if observed_mc:
         results["monte_carlo"] = monte_carlo(observed_mc, gaps, rng, args.monte_carlo_trials)
-    result_text = json.dumps(results, indent=2, allow_nan=True) + "\n"
-    (out / "results.json").write_text(result_text)
-    args.summary_json.write_text(result_text)
+    (out / "results.json").write_text(json.dumps(results, indent=2, allow_nan=True) + "\n")
     write_report(out / "REPORT.md", results)
     print(f"Wrote deliverables to {out}")
 
