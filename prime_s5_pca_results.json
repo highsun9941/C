@@ -1,0 +1,79 @@
+{
+  "prime_count": 100000,
+  "largest_prime": 1299709,
+  "s5_periods": [
+    5,
+    7,
+    11
+  ],
+  "pca_explained_variance_ratio_3d": [
+    0.2155057251747785,
+    0.20119561663385693,
+    0.1896878157581615
+  ],
+  "pca_explained_variance_ratio_3d_total": 0.6063891575667969,
+  "clustering": {
+    "sample_size": 20000,
+    "kmeans": [
+      {
+        "k": 2,
+        "inertia": 7756.759059417647,
+        "silhouette": 0.34391376955633735
+      },
+      {
+        "k": 3,
+        "inertia": 5977.458158104887,
+        "silhouette": 0.3515053953855925
+      },
+      {
+        "k": 4,
+        "inertia": 4222.270975911135,
+        "silhouette": 0.42802589844619804
+      },
+      {
+        "k": 5,
+        "inertia": 3414.420886473221,
+        "silhouette": 0.4432035573059449
+      },
+      {
+        "k": 6,
+        "inertia": 2601.039001183559,
+        "silhouette": 0.4737038935157636
+      },
+      {
+        "k": 7,
+        "inertia": 1793.8312309689118,
+        "silhouette": 0.5381844727220562
+      },
+      {
+        "k": 8,
+        "inertia": 997.4826651469931,
+        "silhouette": 0.6033299265568306
+      }
+    ],
+    "best_by_silhouette": {
+      "k": 8,
+      "inertia": 997.4826651469931,
+      "silhouette": 0.6033299265568306
+    }
+  },
+  "riemann_zero_count": 200,
+  "riemann_zero_correlations": {
+    "pc1": {
+      "pearson": 0.0050813557551187254,
+      "spearman": 0.00972174304357609
+    },
+    "pc2": {
+      "pearson": -0.017749841758019948,
+      "spearman": -0.009199729993249833
+    },
+    "pc3": {
+      "pearson": -0.008821660993714023,
+      "spearman": -0.013734343358583968
+    },
+    "pc_radius": {
+      "pearson": 0.014208499138571383,
+      "spearman": 0.020061501537538443
+    }
+  }
+}
