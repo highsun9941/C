@@ -33,6 +33,24 @@ periods (5, 7, 11), embed three unit circles into R^6, and normalize:
             cos(2π(x mod 11)/11), sin(2π(x mod 11)/11)) / sqrt(3)
 
 The division by sqrt(3) makes ||f(x)||_2 = 1, so f(x) lies on S^5.
+"""Prime-to-S^5 PCA, clustering, and Riemann-zero correlation analysis.
+
+This script generates the first N primes, maps each prime p to a point on S^5
+(the unit 5-sphere in R^6), projects the cloud to three principal components,
+tests simple clustering hypotheses, and correlates early PCA trajectories with
+initial non-trivial Riemann zeta zero ordinates.
+
+Default S^5 map
+---------------
+For each prime p, use three residue angles modulo pairwise-coprime periods
+(5, 7, 11), then embed three unit circles into R^6 and normalize:
+
+    x(p) = (cos(2πp/5), sin(2πp/5), cos(2πp/7), sin(2πp/7),
+            cos(2πp/11), sin(2πp/11)) / sqrt(3)
+
+The division by sqrt(3) makes ||x(p)||_2 = 1, so x(p) lies on S^5.
+Change PERIODS below if your intended "above S^5 coordinates" use a different
+triple of angular periods.
 """
 from __future__ import annotations
 
@@ -110,6 +128,14 @@ def values_to_s5(values: np.ndarray, periods: Iterable[int] = PERIODS) -> np.nda
     coords = []
     for q in periods:
         theta = 2.0 * np.pi * np.mod(values, q) / q
+def primes_to_s5(primes: np.ndarray, periods: Iterable[int] = PERIODS) -> np.ndarray:
+    """Map primes to S^5 coordinates in R^6 via three normalized circle pairs."""
+    periods = tuple(periods)
+    if len(periods) != 3:
+        raise ValueError("S^5 mapping requires exactly three periods")
+    coords = []
+    for q in periods:
+        theta = 2.0 * np.pi * (primes % q) / q
         coords.extend([np.cos(theta), np.sin(theta)])
     return (np.column_stack(coords) / math.sqrt(3.0)).astype(np.float64)
 
@@ -131,6 +157,8 @@ def clustering_report(
     k_values: Iterable[int] = K_RANGE,
 ) -> dict:
     """Evaluate KMeans silhouette scores for requested k values on 3D scores."""
+def clustering_report(scores: np.ndarray, sample_size: int, random_state: int) -> dict:
+    """Evaluate k-means silhouette scores for k=2..8 on the 3D PCA scores."""
     rng = np.random.default_rng(random_state)
     if len(scores) > sample_size:
         idx = rng.choice(len(scores), sample_size, replace=False)
@@ -143,6 +171,11 @@ def clustering_report(
         labels = model.fit_predict(data)
         rows.append({
             "k": int(k),
+    for k in range(2, 9):
+        model = KMeans(n_clusters=k, n_init=20, random_state=random_state)
+        labels = model.fit_predict(data)
+        rows.append({
+            "k": k,
             "inertia": float(model.inertia_),
             "silhouette": float(silhouette_score(data, labels)),
         })
@@ -294,6 +327,7 @@ def main() -> None:
     parser.add_argument("--monte-carlo-trials", type=int, default=1_000)
     parser.add_argument("--monte-carlo-sample-count", type=int, default=300)
     parser.add_argument("--monte-carlo-cluster-sample", type=int, default=300)
+    parser.add_argument("--cluster-sample", type=int, default=20_000)
     parser.add_argument("--random-state", type=int, default=42)
     parser.add_argument("--output", type=Path, default=Path("prime_s5_pca_results.json"))
     args = parser.parse_args()
@@ -311,6 +345,9 @@ def main() -> None:
 
     assert prime_scores is not None
     prime_metrics = dataset_metrics["primes"]
+    primes = first_primes(args.prime_count)
+    points = primes_to_s5(primes)
+    scores, components, explained = pca_3d(points)
     report = {
         "prime_count": args.prime_count,
         "largest_prime": int(primes[-1]),
@@ -328,6 +365,11 @@ def main() -> None:
             prime_metrics["pca_explained_variance_ratio_3d_total"],
             prime_metrics["clustering"]["best_by_silhouette"]["silhouette"],
         ),
+        "pca_explained_variance_ratio_3d": explained.tolist(),
+        "pca_explained_variance_ratio_3d_total": float(explained.sum()),
+        "clustering": clustering_report(scores, args.cluster_sample, args.random_state),
+        "riemann_zero_count": args.zero_count,
+        "riemann_zero_correlations": correlations(scores, args.zero_count),
     }
     args.output.write_text(json.dumps(report, indent=2, ensure_ascii=False) + "\n")
     print(json.dumps(report, indent=2, ensure_ascii=False))
