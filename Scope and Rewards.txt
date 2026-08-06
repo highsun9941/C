@@ -1,0 +1,43 @@
+Smart Contract
+Asset name | Type | Max. severity | Bounty | Last update | Resolved Reports 
+https://explorer.cronos.org/token/0x2e53c5586e12a99d4CAE366E9Fc5C14fE9c6495d | Smart contract | Critical | Eligible | Apr 22, 2026 | 0 (0%)
+https://etherscan.io/token/0xfe18ae03741a5b84e39c295ac9c856ed7991c38e Bounty Range Changes: CDCETH Smart Contract Critical Severity: Up to $50,000 USD Extreme Tier: Up to $1,000,000 | Smart contract | Critical | Eligible | Dec 10, 2024 | 0 (0%)
+
+Extreme Tier Not Eligible
+Depending on the asset, the highest Critical bounty is **$5,000.** Our Low to Critical rewards are based on severity per CVSS 3.1 (the Common Vulnerability Scoring Standard). Extreme bounties are not rewarded based on CVSS. Please note these are general guidelines, and reward decisions are at the discretion of Crypto.com.
+Asset name | Type | Max. severity | Bounty | Last update | Resolved Reports 
+web.crypto.com | Domain | Critical | Eligible | Nov 8, 2024 | 8 (2%)
+og.com OG is available now in the U.S. via App Store, Google Play, and OG.com. | Domain | Critical | Eligible | Feb 4, 2026 | 2 (1%)
+*.mona.co We will consider all vulnerability reports against assets in Crypto.com's control. Severity might be limited for certain assets based on business impact. | Wildcard | Critical | Eligible | Jan 10, 2024 | 5 (1%)
+*.crypto.com We will consider all vulnerability reports against assets in Crypto.com's control. Severity might be limited for certain assets based on business impact. | Wildcard | Critical | Eligible | Jan 10, 2024 | 96 (24%)
+com.monaco.mobile | iOS: App Store | High | Eligible | Mar 12, 2024 | 14 (4%)
+co.mona.android Get the app here: https://play.google.com/store/apps/details?id=co.mona.android You won’t need test accounts for this as it will be public-facing sites for now. The app should give you the functionality to start using CRO services. | Android: Play Store | High | Eligible | Mar 12, 2024 | 19 (5%)
+nadex.com For this asset, we only accept Critical and High severity issues. | Domain | Medium | Eligible | Feb 3, 2025 | 7 (2%)
+merchant.crypto.com Reward for GraphQL-based DOS that can cause service disruption will be capped at $200 USD | Domain | Medium | Eligible | May 1, 2026 | 29 (7%)
+https://crypto.com/price | URL | Medium | Eligible | Jul 13, 2023 | 8 (2%)
+Crypto.com Wallet Extension | Other | Medium | Eligible | Mar 28, 2024 | 0 (0%)
+com.defi.wallet https://play.google.com/store/apps/details?id=com.defi.wallet | Android: Play Store | Medium | Eligible | Mar 15, 2025 | 16 (4%)
+com.defi.wallet https://apps.apple.com/app/crypto-com-wallet/id1512048310 | iOS: App Store | Medium | Eligible | Mar 15, 2025 | 9 (2%)
+travel.crypto.com	Domain | Low | Eligible | Apr 13, 2026 | 0 (0%)
+tax.crypto.com For this asset, we only accept Critical and High severity issues. | Domain | Low | Eligible | Mar 10, 2025 | 14 (4%)
+js.crypto.com | Domain | Low | Eligible | Mar 15, 2025 | 4 (1%)
+https://crypto.com/nft Reward for GraphQL-based DOS that can cause service disruption will be capped at $500 USD | URL | Low | Eligible | Mar 12, 2025 | 13 (3%)
+developer.crypto.com | Domain | Low | Eligible | May 8, 2025 | 0 (0%)
+developer-platform-api.crypto.com | Domain | Low | Eligible | Nov 8, 2024 | 0 (0%)
+developer-api.crypto.com | Domain | Low | Eligible | May 8, 2025 | 1 (0%)
+
+Extreme Tier Eligible
+Depending on the asset, the highest Critical bounty is **$40,000.** Our Low to Critical rewards are based on severity per CVSS 3.1 (the Common Vulnerability Scoring Standard). Extreme bounties are not rewarded based on CVSS. Please note these are general guidelines, and reward decisions are at the discretion of Crypto.com. ## Extreme Bounty Range: $40,000 - $1,000,000 Crypto.com, in our discretion, offers a higher tier of Extreme bounties of **up to $1 million** for in-scope vulnerabilities against our platform that could result in a significant loss of funds or a data breach. While we do not outline exact criteria for extreme bounties given each one being an extreme edge case, these are generally vulnerabilities that could result in a quick and immediate loss of over **$1 million** in funds to Crypto.com or our users, or that could dump customer PII en masse. Extreme Bounties might be paid in a combination of stable cryptocurrencies and traditional fiat funds.
+Asset name | Type | Max. severity | Bounty | Last update | Resolved Reports 
+https://crypto.com/exchange | URL | Critical | Eligible | Apr 14, 2020 | 24 (6%)
+Crypto.com mobile app APIs that require an account Includes any BFF APIs | API | Critical | Eligible | Dec 2, 2024 | 1 (0%)
+Crypto.com Exchange APIs that require an account Includes any BFF APIs | API | Critical | Eligible | Dec 2, 2024 | 2 (1%)
+app.mona.co | Domain | Critical | Eligible | Jan 21, 2021 | 24 (6%)
+
+Excluded Assets
+Any domain, property, product, protocol, or service of the app/hardware/software version not explicitly listed in the In-Scope section is out of scope; submissions are welcome but not guaranteed for the bounty/bonus.
+Asset name | Type | Max. severity | Bounty | Last update | Resolved Reports 
+https://github.com/crypto-com/swap-contracts-periphery | Source code | None | Ineligible | Mar 12, 2024 | 0 (0%)
+https://github.com/crypto-com/swap-contracts-core | Source code | None | Ineligible | Mar 12, 2024 | 0 (0%)
+https://github.com/crypto-com/cro-staking | Source code | None | Ineligible | Mar 12, 2024 | 0 (0%)
+https://github.com/crypto-com/chain-desktop-wallet | Source code | None | Ineligible | Nov 8, 2024 | 0 (0%)
