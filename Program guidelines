@@ -1,0 +1,53 @@
+
+Introduction
+Hack both the most regulated and licensed cryptocurrency platform in the world, and the highest-paying Bug Bounty program on HackerOne. Earn up to $1 million. Make the world more secure. Happy Hacking!
+
+Program highlights
+Contact : hackerone@crypto.com
+Open Scope: Rewards reports for all owned assets based on impact, even if not listed in scope. 
+Fast Payment: Ensures payment within 1 month of receiving a vulnerability report. 
+Gold Standard Safe Harbor: Adheres to Gold Standard Safe Harbor. 
+Platform Standards: Fully compliant with Platform Standards. 
+Top Response Efficiency : This program's response efficiency is above 90%. 
+
+Scope exclusions
+Core Ineligible Findings are out of scope. Learn more 
+Category | Exclusion details
+Publicly Available Credentials | Crypto.com does not award reports of publicly available credentials. We will award reports for credentials that you can demonstrate were exposed due to a fault of Crypto.com.
+Internally Known Issues | We might not be able to provide a bounty if you report an issue that is already known internally. However, we will provide a bounty if you are able to convince us that the severity and impact is greater than previously known.
+
+Overview
+# Our Products
+As a globally regulated company, Crypto.com is required to follow various laws and regulations in order to provide you access to our services. This means that to gain access to our main product, the Crypto.com App, you will need to go through a Know-Your-Customer (KYC) signup flow. You can find more information at https://help.crypto.com/en/articles/6185958-how-to-sign-up-for-the-crypto-com-app. We encourage you to download our app at https://download.crypto.com!
+Our app has over 100 million users and, as of December 2024, is the highest volume cryptocurrency trading app in the United States. While we understand that going through a sign-up process to gain access to our crown jewels is not ideal for ethical hackers, we are committed to making your experience with our program as quick, friendly, and fair as possible.
+Please email us at hackerone@crypto.com if you have any questions, comments, or need help related to our Bug Bounty program.
+Thanks for reading and for considering hacking us!
+
+# Scope Message
+We will accept reports on any asset that is within Crypto.com's control. For assets outside of our control, like vendors (e.g. https://help.crypto.com), we will accept reports if the vulnerability was caused due to a misconfiguration by us.
+
+# Out of Scope: User and Personnel Targeting
+We strictly prohibit any attacks targeting our users, employees, or staff. This is out of scope and includes, but is not limited to:
+* Deceptive Software: Publishing or distributing malicious or baiting software, including IDE extensions (e.g., VSCode), browser extensions, AI skills, or public code packages.
+* Social Engineering: Attempting to trick or socially engineer staff or users into installing third-party tools or clicking links.
+* Unauthorized Data Collection: Extracting any data, beacons, or telemetry from our users' or staff members' machines, regardless of whether the data is deemed "harmless" or benign.
+* Malware: Any attacks involving viruses, trojans, or destructive payloads.
+
+# Commitments
+By engaging in any activity under this HackerOne program:
+* **We** commit to working with you to making Crypto.com, our customers, and our products more secure
+* We commit to responding to all reports as soon as possible and in good-faith
+* We commit to honesty and transparency with you
+* We commit to evaluating all reports for bounty eligibility fairly and neutrally
+* We commit to making ourselves available upon request when reasonable to assist you
+- **You** commit to not engaging in any activities under this or any other Crypto.com-affiliated HackerOne programs as or with the assistance of a current or former employee, contractor, or vendor
+- You commit to not attempting to sabotage or disrupt any of our operations
+- You commit to following HackerOne's Code of Conduct
+- You commit to reporting potential security issues only through our Bug Bounty program
+
+# Smart Contracts
+For vulnerabilities against in-scope smart contracts, please note that we score internally only based on potential impact to user funds and cryptographic security rather than CVSS 3.1. As always, all reports must come with a valid Proof-of-Concept. This means that reports operating on theoretical attacks such as governance attacks, incorrect data supplied by third-party oracles, sybil attacks, or lacks of liquidity are not considered valid reports.
+We only consider the latest mainnet releases of blockchain assets as in-scope. We will not consider reports against assets marked "Mock" or "Test". Please note that any report which included draining another individual's funds or blocking them access to their funds without their consent will automatically make you ineligible for this program.
+
+# Extended Policy
+This document is intended to be concise and precise. An extended version of our HackerOne policy, including sections such as **Out-of-scope Vulnerabilities** and **Vulnerability Severity Definitions**, can be found [here](https://github.com/crypto-com/h1-policy-guidelines).
