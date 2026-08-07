@@ -39,25 +39,3 @@ Attachments :
 Drag and drop | select files
 Max 250MB per file
 Record a demo
-
----
-
-The pre-submission review found several blocking issues that need to be addressed before you can submit:
-
-Blocking Issues:
-Default Title - The report still has the generic default title and needs a descriptive one
-Empty Template - The report contains only placeholder text with no actual vulnerability details
-Report Quality - All sections need to be filled with real information about the vulnerability
-Report Completeness - Missing actual steps to reproduce and proof of concept
-
-Non-blocking Issues:
-No matching asset found in the program's scope
-Cannot verify severity without actual vulnerability details
-Cannot classify weakness without substantive information
-
-What you need to do:
-Replace all placeholder text like "[Add a summary of the vulnerability]" with actual details about the security issue you found
-Provide specific, numbered steps to reproduce the vulnerability
-Include a working proof of concept
-Add a descriptive title summarizing the vulnerability
-Explain the real-world impact
