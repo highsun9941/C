@@ -1,0 +1,84 @@
+Submit with severity: Medium (Privileged access required, but significant impact if exploited)
+
+## Summary:
+The updateExchangeRate function in the CDCETH smart contract (LiquidETHV1) allows an authorized oracle/admin to update the exchange rate between cDCETH and the underlying DAI. However, the function only validates that the new rate is greater than 0 (require(newExchangeRate > 0)). It lacks an upper bound validation or sanity check to prevent setting an arbitrarily high exchange rate.
+This vulnerability could allow an attacker who compromises the admin/oracle key to manipulate the token valuation, potentially causing significant financial harm to users and exposing Crypto.com to reputational and regulatory risks.
+
+## Steps To Reproduce:
+1. Fork the Ethereum mainnet at the latest block using Foundry or Hardhat
+2. Identify the current contract owner/oracle address via owner() or by examining transaction history
+3. Impersonate the owner/oracle address using vm.startPrank() (Foundry) or setBalance + transaction (Hardhat)
+4. Call updateExchangeRate(uint256 newRate) with an excessively large value (e.g., 1e50 or type(uint256).max)
+5. Observe that the transaction succeeds despite the rate being economically impossible
+6. Query exchangeRate() to confirm it has been updated to the absurd value
+
+## Proof of Concept:
+See attached file: poc_foundry_script.t.sol
+The script demonstrates:
+Connecting to an Ethereum mainnet fork
+Identifying and impersonating the contract owner
+Calling updateExchangeRate() with a malicious value (1e50)
+Confirming the rate was successfully updated
+Key Code Snippet:
+solidity
+uint256 maliciousRate = 1e50;
+try ICDCETH(CDCETH_ADDRESS).updateExchangeRate(maliciousRate) {
+    console.log("SUCCESS: Exchange rate updated to malicious value!");
+} catch {
+    console.log("FAILED: Transaction reverted.");
+}
+
+## Recommended Fix:
+Implement both absolute caps and rate-of-change limits:
+solidity
+function updateExchangeRate(uint256 newExchangeRate) external onlyOracle {
+    require(newExchangeRate > 0, "LiquidETHV1: new exchange rate cannot be 0");
+    
+    // Add upper bound validation
+    uint256 MAX_EXCHANGE_RATE = 1e25; // Reasonable maximum based on token decimals
+    require(newExchangeRate <= MAX_EXCHANGE_RATE, "LiquidETHV1: rate exceeds maximum");
+    
+    // Optional: Add rate-of-change limit (e.g., max 10% change per update)
+    uint256 currentRate = exchangeRate();
+    require(
+        newExchangeRate <= currentRate * 110 / 100,
+        "LiquidETHV1: rate increase too high"
+    );
+    require(
+        newExchangeRate >= currentRate * 90 / 100,
+        "LiquidETHV1: rate decrease too high"
+    );
+    
+    bytes32 position = _EXCHANGE_RATE_POSITION;
+    assembly {
+        sstore(position, newExchangeRate)
+    }
+}
+
+## Supporting Material/References:
+Etherscan: https://etherscan.io/token/0xfe18ae03741a5b84e39c295ac9c856ed7991c38e
+Related CWE: CWE-20 (Improper Input Validation)
+
+  * [Attachment / reference.]
+poc_foundry_script.t.sol - Foundry POC script
+slither_report.json - Slither static analysis report (includes 7 LOW severity issues)
+CDCETH_implementation.sol - Full implementation contract source code
+CDCETH_proxy.sol - Proxy contract source code
+
+## Impact
+
+## Customer Impact:
+If an attacker gains control of the admin/oracle key, they could:
+Manipulate Token Valuation: Set the exchange rate to an artificially high value, making cDCETH appear vastly more valuable than its underlying DAI reserves
+Exploit DeFi Integrations: If cDCETH is used as collateral in lending protocols (Aave, Compound, etc.), the attacker could borrow excessive amounts of other assets against inflated collateral value
+Cause Unfair Redemptions: Users redeeming cDCETH during the manipulation period would receive significantly fewer underlying tokens than expected
+Erode Trust: Discovery of such a basic validation flaw undermines confidence in Crypto.com's security engineering practices
+
+## Business Impact:
+Financial Loss: Potential liability from exploited DeFi positions or user losses during manipulation periods
+Reputational Damage: Public disclosure of a trivial logic flaw in a core financial contract could deter institutional and retail users
+Regulatory Scrutiny: As a regulated entity, Crypto.com may face questions from regulators about inadequate smart contract security controls
+Program Credibility: This finding demonstrates that even audited, production contracts can contain basic vulnerabilities, highlighting the value of continuous bug bounty programs
+
+
+Thank you for your submission. The behavior described requires the privileged oracle role to act maliciously or be compromised, which is excluded from the program scope. As such we deem this report out of scope.
